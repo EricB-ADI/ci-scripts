@@ -108,7 +108,7 @@ if row > 1 or col > 1:
 
     name = pdf_file_name.split('/')[-1]
     board = name.split('.')[0].replace('.pdf', '').upper()
-    fig.suptitle(f'Packet Error Rate vs Attenuation\n{board}', fontsize=10)
+    fig.suptitle(f'Packet Error Rate vs Receive Power\n{board}', fontsize=10)
 
     if axs.ndim == 1:
         plt.subplots_adjust(top=0.83, hspace=0.5)
@@ -123,30 +123,33 @@ if row > 1 or col > 1:
         row = int(case / len(phys))
         print(f'row: {row}, col: {col}')
 
+
+        
+
         # Create line plot with atten to perSlave
         print("len     :", packetLen)
         print("phy     :", phy)
         print("txPower :", txPower)
         tempDf = df.loc[(df['packetLen'] == packetLen) & (
             df['phy'] == phy) & (df['txPower'] == txPower)]
-        '''
+        
         name = pdf_file_name.split('/')[-1]
         board = name.split('_')[2].replace('.pdf', '').upper()
-        fig.suptitle(f'Packet Error Rate vs Attenuation\n{board}', fontsize=10)
+        fig.suptitle(f'Packet Error Rate vs Receive Power\n{board}', fontsize=10)
         fig.tight_layout()
         plt.subplots_adjust(bottom=0.1)
-        '''
+        
         title = f'packet len: {packetLen}\nphy: {phy_str[phy]}\ntxPower:{txPower}'
         if axs.ndim == 1:
             axs[row].set_title(title, fontdict={'fontsize': 6, 'fontweight': 'medium'})
-            axs[row].set_xlabel('Attenuation, dBm', fontdict={"fontsize": 5})
+            axs[row].set_xlabel('Receive Power, dBm', fontdict={"fontsize": 5})
             axs[row].set_ylabel('PER (%)', fontdict={"fontsize": 5})
             axs[row].tick_params(axis='both', which='major', labelsize=4)
             axs[row].plot(tempDf["atten"], tempDf["perSlave"], "-x", linewidth=0.25, ms=0.5)
             axs[row].axhline(y=SPEC, color='r', linestyle=':', linewidth=0.5)
         else:
             axs[row, col].set_title(title, fontdict={'fontsize': 6, 'fontweight': 'medium'})
-            axs[row, col].set_xlabel('Attenuation, dBm', fontdict={"fontsize": 5})
+            axs[row, col].set_xlabel('Receive Power, dBm', fontdict={"fontsize": 5})
             axs[row, col].set_ylabel('PER (%)', fontdict={"fontsize": 5})
             axs[row, col].tick_params(axis='both', which='major', labelsize=4)
             axs[row, col].plot(tempDf["atten"], tempDf["perSlave"], "-x", linewidth=0.25, ms=0.5)
@@ -206,11 +209,11 @@ for packetLen, phy, txPower in itertools.product(lens, phys, txPowers):
     fig = plt.figure()
     ax1 = fig.add_axes((0.1, 0.2, 0.8, 0.7))
 
-    title = f'Packet Error Rate vs Attenuation\n'\
+    title = f'Packet Error Rate vs Receive Power\n'\
             f'\n{board}\n'\
             f'Packet length: {packetLen}, PHY: {phy_str[phy]}, txPower:{txPower}'
     ax1.set_title(title)
-    ax1.set_xlabel('Attenuation, dBm')
+    ax1.set_xlabel('Receive Power, dBm')
     ax1.set_ylabel('PER, Percentage')
 
     ax1.plot(tempDf["atten"], tempDf["perSlave"], "-x", linewidth=1, ms=2)

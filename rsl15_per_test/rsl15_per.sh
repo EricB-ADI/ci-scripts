@@ -59,12 +59,15 @@ echo
 
 #lock the resources
 echo "Try to lock the hardware resources."
+
 python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Workspace/Resource_Share/mc_rf_sw.txt
+echo "got switch"
 python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Workspace/Resource_Share/${BRD1}.txt
+echo "got ${BRD1}"
 python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Workspace/Resource_Share/${BRD2}.txt
+echo "got ${BRD2}"
 
 
-ls ~/Workspace/Resource_Share/
 
 #connect the boards through the rf switch
 echo "#--------------------------------------------------------------------------------------------"
