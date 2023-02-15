@@ -94,14 +94,16 @@ echo
 
 #run DTM test
 
-resultFile="rsl15_results.csv"
+resultFile="rsl15_results_dtm.csv"
 
 
 python3 $MSDK/Tools/Bluetooth/BLE_hci.py ${BRD1_HCI} -c "reset; exit"
 python3 $MSDK/Tools/Bluetooth/BLE_hci.py ${BRD2_HCI} -c "reset; exit"
 
 
-python3 $MSDK/Tools/Bluetooth/dtm_sweep_vs.py ${BRD2_HCI} ${BRD1_HCI} ${resultFile}
+channelLoss=16.4
+
+python3 $MSDK/Tools/Bluetooth/dtm_sweep_vs.py ${BRD2_HCI} ${BRD1_HCI} ${resultFile} -cl ${channelLoss}
 
 python3 $MSDK/Tools/Bluetooth/BLE_hci.py ${BRD1_HCI} -c "reset; exit"
 python3 $MSDK/Tools/Bluetooth/BLE_hci.py ${BRD2_HCI} -c "reset; exit"
@@ -119,3 +121,5 @@ python3 ~/Workspace/Resource_Share/Resource_Share.py  /home/$USER/Workspace/Reso
 
 #plot results
 python3 plot_per_results.py ${resultFile} ${BRD2_DESC} "rsl15_per_data"
+
+

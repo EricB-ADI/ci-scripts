@@ -168,7 +168,7 @@ if row > 1 or col > 1:
                 break
 
         # note
-        fig.text(.5, .01, "Run on all data channels (no advertising channels).", ha='center',
+        fig.text(.5, .01, "Run using DTM on Channel 0", ha='center',
                  fontdict={"fontsize": 5})
 
         print()
@@ -229,7 +229,7 @@ for packetLen, phy, txPower in itertools.product(lens, phys, txPowers):
     # resize the figure to match the aspect ratio of the Axes
     fig.set_size_inches(7, 8, forward=True)
     #fig.text(.5, .10, args.desc, ha='center', fontdict={"fontsize": 12})
-    fig.text(.5, .05, "Run on all data channels (no advertising channels).", ha='center',
+    fig.text(.5, .05, "Run using DTM (Channel 0).", ha='center',
              fontdict={"fontsize": 12})
 
     filename = csv_full_path.replace('.csv', '')

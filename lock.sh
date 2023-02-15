@@ -1,5 +1,6 @@
 #statically use these boards
-BRD1="max32655_board_2"
+# BRD1="max32655_board_2"
+BRD1="max32690_board_A1"
 BRD2="rsl15_1"
 
 # Get Board files
@@ -44,3 +45,15 @@ python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Work
 python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Workspace/Resource_Share/${BRD1}.txt
 python3 ~/Workspace/Resource_Share/Resource_Share.py -l -t 3600 /home/$USER/Workspace/Resource_Share/${BRD2}.txt
 
+#set rf switch
+
+#connect the boards through the rf switch
+echo "#--------------------------------------------------------------------------------------------"
+echo "Set the Mini-circuits RF Switches."
+set -x
+echo RF switch for ${BRD1}
+python3 $MSDK/Tools/Bluetooth/mc_rf_sw.py --model ${BRD1_SW_MODEL} --op set --state ${BRD1_SW_ST}
+echo RF switch for ${BRD2}
+python3 $MSDK/Tools/Bluetooth/mc_rf_sw.py --model ${BRD2_SW_MODEL} --op set --state ${BRD2_SW_ST}
+set +x
+echo
