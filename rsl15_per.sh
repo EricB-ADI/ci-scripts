@@ -88,6 +88,7 @@ echo $stateBrd1
 echo RF switch for ${BRD2}
 stateBrd2=$(python3 $MSDK/Tools/Bluetooth/mc_rf_sw.py --model ${BRD2_SW_MODEL} --op get --state ${BRD2_SW_ST})
 echo $stateBrd2
+echo "Board state"
 set +x
 echo
 
